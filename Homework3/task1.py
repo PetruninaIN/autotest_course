@@ -3,6 +3,10 @@
 
 def modification(lst):
     # Здесь пишем код
+    a = lst[0]
+    lst[0] = lst[-1]
+    lst[-1] = a
+    
     return lst
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
