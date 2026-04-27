@@ -15,6 +15,17 @@
 
 def josephus_task(num_people, kill_num):
     # Здесь нужно написать код
+    warriors = [x for x in range(1, num_people + 1)]
+    current_position = 0
+
+    while len(warriors) > 1:
+        # Вычисляем позицию воина, которого нужно удалить
+        current_position = (current_position + kill_num - 1) % len(warriors)
+        # Удаляем воина из круга
+        warriors.pop(current_position)
+
+    survivor = warriors[0]
+
     return survivor
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
