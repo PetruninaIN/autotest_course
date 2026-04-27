@@ -6,6 +6,15 @@
 
 def which_triangle(a, b, c):
     # Здесь нужно написать код
+    if a == b == c:
+        type_triangle = "Равносторонний"
+    elif a == b or b == c or c == a:
+        type_triangle = "Равнобедренный"
+    elif a + b <= c or b + c <= a or c + a <= b:
+        type_triangle = "Не треугольник"
+    else:
+        type_triangle = "Обычный"
+
     return type_triangle
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
