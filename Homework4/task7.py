@@ -4,6 +4,8 @@
 
 def move_zeros(lst):
     # Здесь нужно написать код
+    lst = [x for x in lst if x != 0] + [0] * lst.count(0)
+
     return lst
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
