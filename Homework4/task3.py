@@ -8,6 +8,9 @@
 
 def sum_digits(num):
     # Здесь нужно написать код
+    new_list = list(map(int, str(num)))
+    our_sum = sum(new_list)
+
     return our_sum
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
