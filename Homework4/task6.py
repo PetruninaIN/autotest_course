@@ -5,6 +5,16 @@
 
 def create_phone_number(num_tuple):
     # Здесь нужно написать код
+    i = 1
+    str_phone = "("
+    for num in num_tuple:
+        str_phone = str_phone + str(num)
+        if i == 3:
+            str_phone = str_phone + ") "
+        elif i == 6:
+            str_phone = str_phone + "-"
+        i += 1
+
     return str_phone
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
