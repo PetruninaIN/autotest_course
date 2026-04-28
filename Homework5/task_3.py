@@ -19,7 +19,39 @@
 
 
 def everything_for_your_cat(cats_data):
-    # Здесь нужно написать код
+    """
+    Группирует данные о кошках по их владельцам.
+
+    Параметры:
+    -----------
+    cats_data : tuple
+        Кортеж (кличка, возраст, имя покупателя, фамилия покупателя).
+
+    Возвращает:
+    ------------
+    our_str: str
+         Строка, где для каждого владельца перечислены все его кошки.
+   """
+    owner_cats = {}  # Словарь: ключ — имя и фамилия владельца, значение — список строк 'кличка, возраст'
+
+    for nickname, age, first_name, last_name in cats_data:
+        owner = f"{first_name} {last_name}"  # полное имя владельца
+        cat_info = f"{nickname}, {age}"  # запись о коте
+
+        # Добавление информации о коте к владельцу
+        if owner in owner_cats:
+            owner_cats[owner].append(cat_info)
+        else:
+            owner_cats[owner] = [cat_info]
+
+    result_lines = []
+    for owner, cats_list in owner_cats.items():
+        cats_str = "; ".join(cats_list)
+        result_lines.append(f"{owner}: {cats_str}")
+
+    # Объединение всех строк с переносами
+    our_str = "\n".join(result_lines)
+
     return our_str
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
