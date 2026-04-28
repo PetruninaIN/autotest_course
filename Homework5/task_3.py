@@ -32,25 +32,28 @@ def everything_for_your_cat(cats_data):
     our_str: str
          Строка, где для каждого владельца перечислены все его кошки.
    """
-    owner_cats = {}  # Словарь: ключ — имя и фамилия владельца, значение — список строк 'кличка, возраст'
+    # Проверка списка на пустоту
+    if len(cats_data) == 0:
+        return ""
 
+    # Создание словаря (имя + фамилия владельца, список строк с информацией о котах)
+    owner_cats = {}
     for nickname, age, first_name, last_name in cats_data:
-        owner = f"{first_name} {last_name}"  # полное имя владельца
-        cat_info = f"{nickname}, {age}"  # запись о коте
-
-        # Добавление информации о коте к владельцу
+        owner = f"{first_name} {last_name}"
+        cat_info = f"{nickname}, {age}"
         if owner in owner_cats:
             owner_cats[owner].append(cat_info)
         else:
             owner_cats[owner] = [cat_info]
 
-    result_lines = []
+    # Создание списка с информацией владелец + коты
+    res = []
     for owner, cats_list in owner_cats.items():
         cats_str = "; ".join(cats_list)
-        result_lines.append(f"{owner}: {cats_str}")
+        res.append(f"{owner}: {cats_str}")
 
-    # Объединение всех строк с переносами
-    our_str = "\n".join(result_lines)
+    # Создание строки с информацией владелец + коты по заданному формату
+    our_str = "\n".join(res) + "\n"
 
     return our_str
 
