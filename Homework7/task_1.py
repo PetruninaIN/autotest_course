@@ -10,6 +10,53 @@
 # Segment((-2, -3), (-4, -5)).y_axis_intersection() --> False
 
 # Здесь пишем код
+import math
+
+class Segment:
+    def __init__(self, point1, point2):
+        """
+        Инициализация отрезка по двум точкам.
+        :param point1: кортеж (x1, y1) — первая точка
+        :param point2: кортеж (x2, y2) — вторая точка
+        """
+        self.x1, self.y1 = point1
+        self.x2, self.y2 = point2
+
+    def length(self):
+        """
+        Возвращает длину отрезка с округлением до 2 знаков после запятой.
+        :return: float — длина отрезка
+        """
+        length = math.sqrt((self.x2 - self.x1) ** 2 + (self.y2 - self.y1) ** 2)
+        return round(length, 2)
+
+    def x_axis_intersection(self):
+        """
+        Проверяет, пересекает ли отрезок ось абсцисс (OX).
+        Отрезок пересекает OX, если точки лежат по разные стороны от оси (y1 * y2 <= 0),
+        но не обе лежат на оси (y1 != 0 или y2 != 0).
+        :return: bool — True, если пересекает, иначе False
+        """
+        # Точки лежат по разные стороны от OX или одна из них на оси
+        if self.y1 * self.y2 <= 0:
+            # Исключаем случай, когда обе точки лежат на оси OX
+            if not (self.y1 == 0 and self.y2 == 0):
+                return True
+        return False
+
+    def y_axis_intersection(self):
+        """
+        Проверяет, пересекает ли отрезок ось ординат (OY).
+        Отрезок пересекает OY, если точки лежат по разные стороны от оси (x1 * x2 <= 0),
+        но не обе лежат на оси (x1 != 0 или x2 != 0).
+        :return: bool — True, если пересекает, иначе False
+        """
+        # Точки лежат по разные стороны от OY или одна из них на оси
+        if self.x1 * self.x2 <= 0:
+            # Исключаем случай, когда обе точки лежат на оси OY
+            if not (self.x1 == 0 and self.x2 == 0):
+                return True
+        return False
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
 
