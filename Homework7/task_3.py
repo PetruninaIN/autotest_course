@@ -24,7 +24,63 @@
 # У класса должно быть СВОЙСТВО how_long, которое вычисляет время прохождения маршрута по формуле max_speed/(4*path)
 
 # Здесь пишем код
+class PublicTransport:
+    def __init__(self, brand, engine_power, year, color, max_speed):
+        self.brand = brand
+        self._engine_power = engine_power  # защищённый атрибут
+        self.year = year
+        self.color = color
+        self.max_speed = max_speed
 
+    @property
+    def info(self):
+        """Возвращает строку с информацией о транспорте."""
+        return (f"Марка: {self.brand}, Цвет: {self.color}, "
+                f"Год выпуска: {self.year}, Мощность двигателя: {self._engine_power}")
+
+
+
+class Bus(PublicTransport):
+    def __init__(self, brand, engine_power, year, color, max_speed,
+                 passengers, park, fare):
+        super().__init__(brand, engine_power, year, color, max_speed)
+        self.passengers = passengers
+        self.__park = None  # приватный атрибут
+        self._fare = fare  # защищённый атрибут
+        # Устанавливаем park через сеттер для проверки диапазона
+        self.park = park
+
+    @property
+    def park(self):
+        """Геттер для приватного атрибута park."""
+        return self.__park
+
+    @park.setter
+    def park(self, value):
+        """Сеттер для park с проверкой диапазона 1000–9999."""
+        if not isinstance(value, int):
+            raise AssertionError("Номер парка должен быть целым числом")
+        if 1000 <= value <= 9999:
+            self.__park = value
+        else:
+            raise AssertionError("Номер парка должен быть в диапазоне от 1000 до 9999")
+
+
+
+class Tram(PublicTransport):
+    def __init__(self, brand, engine_power, year, color, max_speed,
+                 route, path, fare):
+        super().__init__(brand, engine_power, year, color, max_speed)
+        self.__route = route  # приватный атрибут
+        self.path = path
+        self._fare = fare  # защищённый атрибут
+
+    @property
+    def how_long(self):
+        """Вычисляет время прохождения маршрута по формуле max_speed/(4*path)."""
+        if self.path == 0:
+            raise AssertionError("Длина маршрута не может быть нулевой")
+        return self.max_speed / (4 * self.path)
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
 transport = PublicTransport('Автомобиль', 500, 2040, 'Фиолетовый', 300)
